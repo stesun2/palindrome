@@ -8,6 +8,10 @@ function App() {
   // useState Function that updates and renders with any changes in the background
   const [isPalindrome, setIsPalindrome] = useState(false);
 
+  // useState Function create dark mode
+  const [darkMode, setDarkMode] = useState(false);
+  const toggleDarkMode = () => setDarkMode(darkMode ? false : true);
+
   // Function which checks the text if it is a Palindrome.
   const handleTextInput = (event) => {
     console.log(event)
@@ -21,7 +25,7 @@ function App() {
 
     // Passing a boolean to isPalindrome
     console.log(reversed)
-    if (reversed === word) {
+    if (reversed.toLowerCase() === word.toLowerCase()) {
       console.log('it is a palindrome')
       setIsPalindrome(true)
     } 
@@ -32,10 +36,13 @@ function App() {
 
   }
 
-
   // Created a new component called 'NewComponent' which will change the change the text color 
   return (
-    <div className="App">
+    <div className="App" data-theme={darkMode ? "dark" : "light"}>
+        <button onClick={toggleDarkMode}>
+          {darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+        </button>
+        
         <h1>Is it a Palindrome?</h1>
         <input onChange={ handleTextInput } type="text" id="palindrome-input" />
         <NewComponent palindrome={ isPalindrome }/> 
